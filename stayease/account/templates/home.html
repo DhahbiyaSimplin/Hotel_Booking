@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <!-- ✅ NAVBAR ONLY FOR HOME PAGE -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #012F2F;">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/">Stayease</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'reg' %}">Register</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'user' %}">Rooms</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ✅ HERO SECTION -->
+<div class="container-fluid p-0">
+  <div class="row g-0" style="min-height: 90vh;">
+    
+    <!-- Left Text Section -->
+    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white text-center p-5" style="background-color: #012F2F;">
+      <div>
+        <h1 class="display-5 fw-bold" style="font-family: 'Playfair Display', serif;">
+          Welcome to <br> your luxurious <br> home away <br> from home
+        </h1>
+        <p class="mt-4 fs-5" style="max-width: 500px;">
+          Discover comfort, class, and charm at MyHotel — the perfect getaway with a serene view, premium rooms, and world-class service. Whether it's business or leisure, we've got everything you need for an unforgettable stay.
+        </p>
+        <div class="mt-4">
+          <a href="/rooms/" class="btn btn-outline-light btn-lg me-3">Book Your Stay</a>
+          <a href="/contact/" class="btn btn-light btn-lg">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Image Section -->
+    <!-- Right Image Section -->
+<div class="col-md-6 d-flex align-items-center justify-content-center">
+  <div style="width: 100%; aspect-ratio: 1 / 1; background-image: url('/media/homepage.png'); background-size: cover; background-position: center;">
+  </div>
+</div>
+
+
+  </div>
+</div>
+  </body>
+</html>
+
