@@ -16,8 +16,7 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="./static/css/home.css">
-        <script
+         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
             crossorigin="anonymous"
@@ -31,19 +30,20 @@
     </head>
 
     <body>
-        <!-- <div class="home container-fluid">
-            <img id="image" src="https://images.rosewoodhotels.com/is/image/rwhg/heroshot-punta-bonita-pool-and-beach-1" alt="">
-        </div> -->
-
-        <div class="container-fluid p-0">
-            <div class="image" style="background-image: url('./media/Phomepage.webp');">
-                <div class="d-flex flex-column justify-content-center align-items-center text-white text-center h-100" style="background-color: rgba(0, 0, 0, 0.4);">
-                    <h1 class="display-3 fw-bold">Welcome to StayEase</h1>
-                    <p class="lead">Book luxury rooms with comfort and style</p>
-                    <a href="{% url 'home' %}" class="btn btn-light mt-3">Learn More</a>
-                </div>
-            </div>
+        <div class="container mt-5">
+            <h3>Previous Bookings</h3>
+            {% if bookings %}
+                {% for booking in bookings %}
+                    <div class="card mb-3 p-3 shadow-sm">
+                        <h5>{{ booking.room_type.name }} × {{ booking.quantity }}</h5>
+                        <p><strong>Check-in:</strong> {{ booking.check_in }}</p>
+                        <p><strong>Check-out:</strong> {{ booking.check_out }}</p>
+                        <p><strong>Status:</strong> {{ booking.status }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No previous bookings.</p>
+            {% endif %}
         </div>
-
     </body>
 </html>

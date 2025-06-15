@@ -43,6 +43,7 @@
         <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'reg' %}">Register</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'user' %}">Rooms</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'allreviews' %}">Reviews</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
       </ul>
     </div>
@@ -63,8 +64,7 @@
           Discover comfort, class, and charm at MyHotel — the perfect getaway with a serene view, premium rooms, and world-class service. Whether it's business or leisure, we've got everything you need for an unforgettable stay.
         </p>
         <div class="mt-4">
-          <a href="/rooms/" class="btn btn-outline-light btn-lg me-3">Book Your Stay</a>
-          <a href="/contact/" class="btn btn-light btn-lg">Contact Us</a>
+          <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg me-3">Book Your Stay</a>
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
     <!-- Right Image Section -->
     <!-- Right Image Section -->
 <div class="col-md-6 d-flex align-items-center justify-content-center">
-  <div style="width: 100%; aspect-ratio: 1 / 1; background-image: url('/media/homepage.png'); background-size: cover; background-position: center;">
+  <div style="width: 100%; aspect-ratio: 1 / 1; background-image: url('/media/home.png'); background-size: cover; background-position: center;">
   </div>
 </div>
 

@@ -48,4 +48,10 @@ class RegView(FormView):
             messages.success(request, "Registration Completed! !")
             return redirect( 'login')
         return render(request,"reg.html",{"form":form_data})
+    
+
+def logoutView(request):
+    logout(request)
+    messages.info(request,"Logged out successfully!")
+    return redirect('login')
 

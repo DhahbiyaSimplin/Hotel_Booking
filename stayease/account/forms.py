@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Booking
 
 class LoginForm(forms.Form):
-    username=forms.CharField(max_length=100,widget=forms.TextInput(attrs={"class":"form-control"}))
-    password=forms.CharField(max_length=100,widget=forms.PasswordInput(attrs={"class":"form-control"}))
+    username=forms.CharField(max_length=100,widget=forms.TextInput(attrs={"class":"form-control",'placeholder': 'Enter your username'}))
+    password=forms.CharField(max_length=100,widget=forms.PasswordInput(attrs={"class":"form-control",'placeholder': 'Enter your password'}))
 
 
 class RegForm(UserCreationForm):

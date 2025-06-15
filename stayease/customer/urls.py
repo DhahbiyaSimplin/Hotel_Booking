@@ -10,5 +10,8 @@ urlpatterns=[
     path('rooms/<int:room_id>/book/', views.book_room, name='bookroom'),
     path('rooms/<int:room_id>/confirm/', views.confirm_booking, name='confirmbooking'),
     path('booking/success/', views.booking_success, name='bookingsuccess'),
-
+    path('bookings/upcoming/', views.upcoming_bookings, name='upcomingbookings'),
+    path('bookings/previous/', views.previous_bookings, name='previousbookings'),
+    path('reviews/', views.all_reviews, name='allreviews'),
+    path('rooms/<int:room_id>/review/', views.add_review, name='addreview'),
 ]
