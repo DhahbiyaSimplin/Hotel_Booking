@@ -1,4 +1,5 @@
 {% load widget_tweaks %}
+{% load socialaccount %}
 
 <!doctype html>
 <html lang="en">
@@ -102,6 +103,9 @@
 
         <div class="text-center mt-3">
             <p>Don't have an account? <a href="{% url 'reg' %}" class="link-text">Register here</a></p>
+        </div>
+        <div class="text-center mt-3">
+            <a href="{% provider_login_url 'google' %}" class="link-text">Login with Google</a>
         </div>
     </div>
 

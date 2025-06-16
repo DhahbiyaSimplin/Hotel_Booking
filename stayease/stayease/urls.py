@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from account.views import LandingView,HomeView,LoginView,RegView,logoutView
+from useraccount.views import LandingView,HomeView,LoginView,RegView,logoutView
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -28,7 +28,8 @@ urlpatterns = [
     path('home',HomeView.as_view(),name='home'),
     path('login',LoginView.as_view(),name='login'),
     path('reg',RegView.as_view(),name='reg'),
-    path('logout',logoutView,name="logout")
+    path('logout',logoutView,name="logout"),
+    path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:
