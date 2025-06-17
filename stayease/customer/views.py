@@ -6,6 +6,9 @@ from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
+import razorpay
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -68,17 +71,17 @@ def confirm_booking(request, room_id):
         quantity = request.POST.get('quantity')
 
         # Save booking to database
-        Booking.objects.create(
+        booking = Booking.objects.create(
             user=request.user,
             room_type=room,
             check_in=check_in,
             check_out=check_out,
             guests=guests,
             quantity=quantity,
-            status='Confirmed'  # optional status field
+            status='Pending'  # optional status field
         )
 
-        return redirect('bookingsuccess')
+        return redirect('paymentcheckout',booking_id=booking.id)
     
 
 def booking_success(request):
@@ -132,3 +135,49 @@ def add_review(request, room_id):
 def all_reviews(request):
     reviews = Review.objects.select_related('room_type', 'user').all().order_by('-date_posted')
     return render(request, 'allreviews.html', {'reviews': reviews})
+
+
+@csrf_exempt
+def payment_checkout(request, booking_id):
+    booking = Booking.objects.get(id=booking_id)
+
+    # Calculate number of nights
+    nights = (booking.check_out - booking.check_in).days
+    amount_rupees = booking.room_type.price_per_night * booking.quantity * nights
+    amount_paise = int(amount_rupees * 100)
+
+    client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+    payment = client.order.create({
+        "amount": amount_paise,  
+        "currency": "INR",
+        "payment_capture": 1
+    })
+
+    booking.razorpay_order_id = payment['id']
+    booking.amount=amount_rupees
+    booking.save()
+
+    return render(request, "checkout.html", {
+        "booking": booking,
+        "payment": payment,
+        "razorpay_key_id": settings.RAZORPAY_KEY_ID,
+        "amount_rupees": amount_rupees
+    })
+
+
+@csrf_exempt
+def payment_success(request, booking_id):
+    booking = Booking.objects.get(id=booking_id)
+
+    # You may want to verify the payment using razorpay client here
+
+    booking.status = 'Confirmed'
+    booking.save()
+
+    return render(request, 'bookingsuccess.html', {
+        'booking': booking,
+        'payment_id': request.POST.get('razorpay_payment_id'),
+        'amount': booking.amount
+    })
+
