@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.views.generic import TemplateView,View,DetailView
-from useraccount.models import RoomType,Booking,Review
+from useraccount.models import RoomType,Booking,Review,Offer
 from useraccount.forms import BookingForm
 from datetime import date
 from django.contrib.auth.decorators import login_required
@@ -9,6 +9,7 @@ from django.http import HttpResponse
 import razorpay
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
 
 # Create your views here.
 
@@ -43,6 +44,11 @@ class RoomDetailView(LoginRequiredMixin,DetailView):
 @login_required(login_url='/login')
 def book_room(request, room_id):
     room = get_object_or_404(RoomType, id=room_id)
+    # ✅ Prevent booking if room is not available
+    if not room.is_available:
+        messages.error(request, "This room is currently not available for booking.")
+        return redirect('user')  # or your rooms listing page
+
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
@@ -63,8 +69,12 @@ def book_room(request, room_id):
 
 
 def confirm_booking(request, room_id):
+    room = get_object_or_404(RoomType, id=room_id)
+     # ✅ Prevent confirming if not available
+    if not room.is_available:
+        messages.error(request, "This room is currently not available.")
+        return redirect('user')  # or any appropriate page
     if request.method == 'POST':
-        room = get_object_or_404(RoomType, id=room_id)
         check_in = request.POST.get('check_in')
         check_out = request.POST.get('check_out')
         guests = request.POST.get('guests')
@@ -181,3 +191,7 @@ def payment_success(request, booking_id):
         'amount': booking.amount
     })
 
+
+# def home(request):
+#     offers = Offer.objects.all()
+#     return render(request, 'home.html', {'offers': offers})

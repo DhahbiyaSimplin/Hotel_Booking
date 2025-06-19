@@ -3,6 +3,7 @@ from django.views.generic import View,TemplateView,ListView,DetailView,FormView
 from .forms import LoginForm,RegForm
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
+from .models import Offer
 
 # Create your views here.
 
@@ -13,7 +14,8 @@ class LandingView(View):
 
 class HomeView(View):
     def get(self,request):
-        return render(request,"home.html")
+        offers = Offer.objects.all()
+        return render(request, 'home.html', {'offers': offers})
     
 
 

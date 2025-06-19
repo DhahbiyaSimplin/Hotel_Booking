@@ -47,3 +47,14 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.user.username} | {self.room_type.name} | {self.rating}/5"
+    
+
+class Offer(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    badge_text = models.CharField(max_length=30, blank=True, null=True)  # e.g., "Limited Time"
+    badge_color = models.CharField(max_length=20, default="primary")  # Bootstrap class like 'danger', 'success'
+    icon = models.CharField(max_length=10, blank=True, null=True)  # Emoji or font-awesome class
+
+    def __str__(self):
+        return self.title
